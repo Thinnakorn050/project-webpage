@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomlist Approver</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        nav {
+          color: #636363;
+          background-color: white;
+        }
+      .bg1 {
+          background-color: #D9D9D9;
+      }
+      .container{
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+      table{
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 30px;
+          margin-top: 30px;
+          border-color: black;
+      }
+      th, td{
+          border: 1px solid;
+          padding: 10px;
+          text-align: center;
+          font-weight: bold;
+      }
+      th{
+          background-color: white;
+          color: black;
+      }
+      td{
+          background-color: #fff;
+      }
+      footer {
+      background-color: white;
+      color: #636363;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+  }
+
+  </style>
+</head>
+<body class="bg1">
+    <!-- nav bar -->
+    <nav class=" p-4">
+        <div class="row px-4">
+            <div class="col-3 h2 textc1 pt-2 ">
+                <a href="/views/G10Homelecturer.html" class="textc1">Home</a>
+            </div>
+            <div class="col text-end h4 pt-2">
+                <!-- เปลี่ยนlinkเป็น.htmlนะ -->
+                <a href="/views/roomlist_lecturer.html" class="textc1 mx-3">Room List</a>
+                <a href="/views/history_lecturer.html" class="mx-3 textc1">History</a>
+                <a href="/views/G10Daslecturer.html" class="mx-2 textc1">Dashboard</a>
+                <button id="signoutBTN" class="btn btn-dark mx-3">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center bg-light mt-5 mb-5">
+            <div class="navbar">
+                <h6>Room List</h6>
+                <Select style="width: 150px;">
+                    <option>All</option>
+                    <option>Free</option>
+                    <option>Disabled</option>
+                    <option>Pending</option>
+                    <option>Reserverd</option>
+                </Select>
+        <table>
+            <tr>
+            <th class>No</th>
+            <th>Status</th>
+            <th>Room</th>
+            <th>Time</th>
+            <th>Student ID</th>
+            <th>Request</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td class="text-secondary">Not available</td>
+            <td>C1 312</td>
+            <td>8:00-10:00</td>
+            <td>-</td>
+            <td><button class="btn btn-secondary" id="btnapp">Approve</button> <button class="btn btn-secondary" id="btndisapp">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td class="text-warning">Pending</td>
+            <td>C1 312</td>
+            <td>10:00-12:00</td>
+            <td>6531501046</td>
+            <td><button class="btn btn-success">Approve</button><button class="btn btn-danger">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td class="text-primary">Reserved</td>
+            <td>C1 312</td>
+            <td>13:00-15:00</td>
+            <td>6531501046</td>
+            <td><button class="btn btn-secondary">Approve</button> <button class="btn btn-secondary">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td class="text-danger">Disabled</td>
+            <td>C1 312</td>
+            <td>15:00-17:00</td>
+            <td>-</td>
+            <td><button class="btn btn-secondary">Approve</button> <button class="btn btn-secondary">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td class="text-primary">Reserved</td>
+            <td>E4 312</td>
+            <td>8:00-10:00</td>
+            <td>6531501046</td>
+            <td><button class="btn btn-secondary">Approve</button> <button class="btn btn-secondary">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td class="text-success">Free</td>
+            <td>E4 312</td>
+            <td>10:00-12:00</td>
+            <td>-</td>
+            <td><button class="btn btn-secondary">Approve</button> <button class="btn btn-secondary">Disapprove</button></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td class="text-danger">Disabled</td>
+            <td>E4 312</td>
+            <td>13:00-15:00</td>
+            <td>-</td>
+            <td><button class="btn btn-secondary">Approve</button> <button class="btn btn-secondary">Disapprove</button></td>
+        </tr>
+    </table>
+    </div>
+    <div class="navbar">
+        <Select>
+            <option>7 per 1 page</option>
+        </Select>
+    </div>
+    </div>
+    <div class="navbar p-4 bg-white">
+        <div class="col-sm-7">
+            <h6>Room reservation</h6>
+        </div>
+
+
+        <script>
+            document.querySelectorAll(".btn").forEach(item => {
+                item.addEventListener("click", function() {
+                    let action = this.innerHTML.trim();
+                    let room = this.parentNode.parentNode.children[2].innerHTML;
+                    Swal.fire({
+                        title: `Are you sure you want to ${action.toLowerCase()} the reservation for room ${room}?`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Success!",
+                                text: `You have ${action.toLowerCase()}d the reservation for room ${room}`,
+                                icon: "success"
+                            });
+                        }
+                    });
+                });
+            });
+        
+            document.getElementById("btnLog").addEventListener("click", function() {
+                Swal.fire({
+                    title: "See you again",
+                    text: "Logout success",
+                    icon: "info"
+                }).then(() => {
+                    window.location.href = "/views/login.html";
+                });
+            });
+        </script>
+        
+</body>
+</html>

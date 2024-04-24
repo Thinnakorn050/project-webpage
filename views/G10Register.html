@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .card {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            border-color: #636363;
+            box-shadow: 0 0 3px;
+        }
+    </style>
+</head>
+
+<body style="background-color:#D9D9D9;">
+    <div>
+        <h1 class="text-center">Room Reservation System</h1>
+        <div class="card">
+            <form method="POST">
+                <div class="form-group mb-3">
+                    <label for="stuId" class="form-label">Student ID</label>
+                    <input type="text" id="stuId" name="stuId" class="form-control" placeholder="Enter Student ID">
+                    <div class="invalid-feedback">Student ID is required.</div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email">
+                    <div class="invalid-feedback">Valid email is required.</div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username">
+                    <div class="invalid-feedback">Username is required.</div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" id="password" name="password" class="form-control" placeholder="Enter Password">
+                    <div class="invalid-feedback">Password is required.</div>
+                        <div class="password-strength"></div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="repassword" class="form-label">Confirm Password</label>
+                    <input type="text" id="repassword" name="repassword" class="form-control"
+                        placeholder="Enter Confirm Password">
+                        <div class="invalid-feedback">Please confirm your password.</div>
+                </div>
+                <div class="text-center">
+                    <div class="d-grid"><button type="submit" class="btn btn-dark btn-flat"
+                        onclick="submitResult(event)">Register</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const nameField = document.getElementById("stuId");
+          const emailField = document.getElementById("email");
+          const usernameField = document.getElementById("username");
+          const passwordField = document.getElementById("password");
+          const confirmPasswordField = document.getElementById("repassword");
+          const signUpButton = document.querySelector('.btn-dark');
+  
+          signUpButton.addEventListener("click", function () {
+              const name = nameField.value.trim();
+              const email = emailField.value.trim();
+              const username = usernameField.value.trim();
+              const password = passwordField.value.trim();
+              const confirmPassword = confirmPasswordField.value.trim();
+  
+              // Validation
+              if (!name || !email || !username || !password || !confirmPassword) {
+                  alert("Please fill in all fields.");
+                  return; // Stop execution if any field is empty
+              }
+  
+              if (password !== confirmPassword) {
+                Swal.fire({
+                    title: "success",
+                    text: "Register success",
+                    icon: "success"
+                }).then((result) => {
+                    window.location.href = "/views/login.html"
+                });
+              }
+
+              
+
+              // Proceed with sign up
+              alert("Register completed");
+              window.location.href = "/views/login.html"; // Redirect to login page
+          });
+      });
+
+
+      // Password Strength Indicator
+      const passwordField = document.getElementById("IDPassword");
+      const passwordStrength = document.querySelector(".password-strength");
+
+      passwordField.addEventListener("input", function () {
+          const password = passwordField.value;
+          const strength = calculatePasswordStrength(password);
+          passwordStrength.innerHTML = `Password Strength: ${strength}`;
+      });
+
+      function calculatePasswordStrength(password) {
+          // This is a simple example, you can implement a more complex logic for password strength
+          const length = password.length;
+          if (length < 6) {
+              return "Weak";
+          } else if (length < 10) {
+              return "Medium";
+          } else {
+              return "Strong";
+          }
+      }
+      
+    </script>
+</body>
+
+</html>

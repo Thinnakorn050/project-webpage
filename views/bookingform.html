@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* CSS styles here */
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Navigation bar -->
+    </nav>
+    <h2>Student Booking</h2>
+    <div class="container">
+        <!-- Room cards will be dynamically generated here -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchRoomData() {
+            try {
+                const response = await axios.get('/getroom');
+                const rooms = response.data;
+
+                const container = document.querySelector('.container');
+                container.innerHTML = '';
+
+                rooms.forEach(room => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    // Construct card content here
+                    // ...
+
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching room data:', error);
+                // Handle error
+            }
+        }
+
+        async function handleAvailableButtonClick(room, time) {
+            try {
+                await bookRoom(room, time);
+                fetchRoomData();
+            } catch (error) {
+                console.error('Error occurred while booking room:', error);
+                // Handle error
+            }
+        }
+
+        async function bookRoom(roomName, timeSlot) {
+            const studentStatus = ''; // Set student status here
+            const date = new Date().toISOString().split('T')[0];
+            const status = 'pending';
+
+            try {
+                const response = await axios.post('/api/bookings', {
+                    roomname: roomName,
+                    time_slot: timeSlot,
+                    student_status: studentStatus,
+                    date: date,
+                    status: status
+                });
+                console.log(response.data.message);
+            } catch (error) {
+                console.error('Error occurred while booking room:', error);
+                throw error;
+            }
+        }
+
+        // Get current date
+        const date = new Date().toISOString().split('T')[0];
+
+        // Call fetchRoomData function initially
+        fetchRoomData();
+    </script>
+</body>
+</html>
